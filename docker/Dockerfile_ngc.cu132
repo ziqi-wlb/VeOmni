@@ -1,0 +1,21 @@
+# https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel-25-06.html
+from nvcr.io/nvidia/pytorch:26.03-py3
+
+# Define environments
+ENV MAX_JOBS=32
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PIP_ROOT_USER_ACTION=ignore
+
+# Define installation arguments
+ARG APT_SOURCE=https://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+
+# Install apt packages.
+RUN apt-get update -y \
+    && apt-get install -y sudo ffmpeg curl wget vim git build-essential \
+    && apt-get install -y tmux \
+    && apt-get clean
+
+RUN pip install -y nvitop
+
+USER root
+
